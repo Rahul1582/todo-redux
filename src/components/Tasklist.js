@@ -1,23 +1,19 @@
-import { Counter } from "./Counter";
-import { Task } from "./Task";
+// import { Counter } from "./Counter";
+import Task from "./Task";
 import styles from "./Tasklist.module.css";
 import clipboard from "./../images/clipboard.svg";
+import { connect } from "react-redux";
 
-export function TaskList({ taskList, onDeleteTask, onSwitchCheck }) {
-  function onHandleDeleteTask(id) {
-    onDeleteTask(id);
-  }
+const mapStateToProps = (state) => {
+  return {
+    todos: state
+  };
+};
 
-  function onHandleSwitchCheck(id) {
-    console.log(`TaskList.jsx ${id}`);
-    onSwitchCheck(id);
-  }
-
+const TaskList = (props) => {
   return (
     <div className={styles.container}>
-      <Counter taskListCounter={taskList} />
-
-      {taskList.length === 0 ? (
+      {props.todos.length === 0 ? (
         <div className={styles.emptyContainer}>
           <img src={clipboard} alt="Empty" />
           <div className={styles.emptyText}>
@@ -26,15 +22,15 @@ export function TaskList({ taskList, onDeleteTask, onSwitchCheck }) {
         </div>
       ) : (
         <div className={styles.tasksContainer}>
-          {taskList.map((task) => {
+          {props.todos.map((task) => {
             return (
               <Task
                 id={task.id}
                 key={task.id}
-                content={task.taskName}
-                isTaskComplete={task.isTaskComplete}
-                onDeleteTask={onHandleDeleteTask}
-                onSwitchCheck={onHandleSwitchCheck}
+                content={task.content}
+                isTaskComplete={task.completed}
+                // onDeleteTask={onHandleDeleteTask}
+                // onSwitchCheck={onHandleSwitchCheck}
               />
             );
           })}
@@ -42,4 +38,6 @@ export function TaskList({ taskList, onDeleteTask, onSwitchCheck }) {
       )}
     </div>
   );
-}
+};
+
+export default connect(mapStateToProps)(TaskList);

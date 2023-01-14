@@ -1,14 +1,28 @@
 import plusSign from "./../images/plussign.svg";
 import styles from "./Newtask.module.css";
 import { useState } from "react";
+import { connect } from "react-redux";
+import { addtodo } from "../redux/reducer";
+import { v4 as uuidv4 } from "uuid";
 
-export function NewTask({ onGetNewTask }) {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (obj) => dispatch(addtodo(obj))
+  };
+};
+
+const NewTask = (props) => {
   const [newTask, setNewTask] = useState("");
 
   function handleCreateNewTask(e) {
     e.preventDefault();
     console.log(newTask);
-    onGetNewTask(newTask);
+    const getId = uuidv4();
+    props.addTodo({
+      id: getId,
+      content: newTask,
+      completed: false
+    });
     setNewTask("");
   }
 
@@ -25,7 +39,7 @@ export function NewTask({ onGetNewTask }) {
     <form onSubmit={handleCreateNewTask} className={styles.form}>
       <input
         type="text"
-        value={newTask} 
+        value={newTask}
         placeholder="Type Something"
         onChange={handleNewTaskChange}
         onInvalid={handleNewTaskInvalid}
@@ -33,8 +47,10 @@ export function NewTask({ onGetNewTask }) {
       />
       <button type="submit">
         Add New Task
-        <img src={plusSign} alt="Image"/>
+        <img src={plusSign} alt="Image" />
       </button>
     </form>
   );
-}
+};
+
+export default connect(null, mapDispatchToProps)(NewTask);

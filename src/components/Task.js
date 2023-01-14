@@ -1,25 +1,17 @@
 import { CheckCircle, Circle, Trash } from "phosphor-react";
-
 import styles from "./Task.module.css";
+import { addtodo, deletetodo, completetodo } from "../redux/reducer";
 
-export function Task({
-  id,
-  content,
-  isTaskComplete,
-  onDeleteTask,
-  onSwitchCheck
-}) {
-  function handleDeleteTask() {
-    onDeleteTask(id);
-  }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (obj) => dispatch(addtodo(obj))
+  };
+};
 
-  function handleSwitchCheck() {
-    onSwitchCheck(id);
-  }
-
+const Task = ({ id, content, isTaskComplete }) => {
   return (
     <div className={styles.taskContainer}>
-      <button onClick={handleSwitchCheck}>
+      <button>
         {isTaskComplete ? (
           <CheckCircle weight="fill" size={17.45} color="var(--blue-300)" />
         ) : (
@@ -33,9 +25,11 @@ export function Task({
         <p>{content}</p>
       )}
 
-      <button title="Delete" onClick={handleDeleteTask}>
+      <button title="Delete">
         <Trash size={14} color="var(--gray-300)" />
       </button>
     </div>
   );
-}
+};
+
+export default Task;
