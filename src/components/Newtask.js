@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const NewTask = (props,id) => {
+const NewTask = (props, id) => {
   const [newTask, setNewTask] = useState("");
 
   function handleCreateNewTask(e) {

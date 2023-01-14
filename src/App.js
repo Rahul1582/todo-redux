@@ -6,7 +6,6 @@ import NewTask from "./components/Newtask";
 import TaskList from "./components/Tasklist";
 
 function App() {
-
   return (
     <div className="App">
       <Header />
