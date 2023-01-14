@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
+:root {
+  --gray-100: #F2F2F2;
+  --gray-200: #D9D9D9;
+  --gray-300: #808080;
+  --gray-400: #333333;
+  --gray-500: #262626;
+  --gray-600: #1A1A1A;
+  --gray-700: #0D0D0D;
+  --purple-300: #8284FA;
+  --purple-600: #5E60CE;
+  --blue-300: #4EA8DE;
+  --blue-600: #1E6F9F;
+  --danger: #E25858;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background: var(--gray-600);
+  color: var(--gray-100);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body, input, textarea, button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--blue-600)
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body::-webkit-scrollbar {
+  width: 0.85rem;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--gray-500);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--gray-700);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid var(--gray-500);  /* creates padding around scroll thumb */
 }
