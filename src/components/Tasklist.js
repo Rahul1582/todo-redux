@@ -1,12 +1,21 @@
 // import { Counter } from "./Counter";
 import Task from "./Task";
+import Counter from "./Counter";
 import styles from "./Tasklist.module.css";
 import clipboard from "./../images/clipboard.svg";
 import { connect } from "react-redux";
+import { deletetodo, completetodo } from "../redux/reducer";
 
 const mapStateToProps = (state) => {
   return {
     todos: state
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteTodo: (id) => dispatch(deletetodo(id)),
+    completeTodo: (id) => dispatch(completetodo(id))
   };
 };
 
@@ -22,6 +31,7 @@ const TaskList = (props) => {
         </div>
       ) : (
         <div className={styles.tasksContainer}>
+          <Counter taskListCounter={props.todos} />
           {props.todos.map((task) => {
             return (
               <Task
@@ -29,8 +39,8 @@ const TaskList = (props) => {
                 key={task.id}
                 content={task.content}
                 isTaskComplete={task.completed}
-                // onDeleteTask={onHandleDeleteTask}
-                // onSwitchCheck={onHandleSwitchCheck}
+                deletetodo={props.deleteTodo}
+                completetodo={props.completeTodo}
               />
             );
           })}
@@ -40,4 +50,4 @@ const TaskList = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(TaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

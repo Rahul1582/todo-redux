@@ -17,10 +17,15 @@ const todoreducer = createSlice({
 
     completetodo: (state, action) => {
       return state.map((todo) => {
-        if (todo.id === action.payload) {
+        if (todo.id === action.payload && todo.completed === false) {
           return {
             ...todo,
             completed: true
+          };
+        } else if (todo.id === action.payload && todo.completed === true) {
+          return {
+            ...todo,
+            completed: false
           };
         }
         return todo;
@@ -29,10 +34,6 @@ const todoreducer = createSlice({
   }
 });
 
-export const {
-    addtodo,
-    deletetodo,
-    completetodo
-} = todoreducer.actions
+export const { addtodo, deletetodo, completetodo } = todoreducer.actions;
 
 export const reducer = todoreducer.reducer;
