@@ -47,7 +47,7 @@ const NewTask = (props, id) => {
       />
       <button type="submit">
         Add New Task
-        <img src={plusSign} alt="Image" />
+        <img src={plusSign} alt="Plus sign" />
       </button>
     </form>
   );
