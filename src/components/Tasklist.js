@@ -20,9 +20,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const TaskList = (props) => {
+
+  console.log(props.todos.reducer);
   return (
     <div className={styles.container}>
-      {props.todos.length === 0 ? (
+      {props.todos.reducer.length === 0 ? (
         <div className={styles.emptyContainer}>
           <img src={clipboard} alt="Empty" />
           <div className={styles.emptyText}>
@@ -31,8 +33,8 @@ const TaskList = (props) => {
         </div>
       ) : (
         <div className={styles.tasksContainer}>
-          <Counter taskListCounter={props.todos} />
-          {props.todos.map((task) => {
+          <Counter taskListCounter={props.todos.reducer} />
+          {props.todos.reducer.map((task) => {
             return (
               <Task
                 id={task.id}
