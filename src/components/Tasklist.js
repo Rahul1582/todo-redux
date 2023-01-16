@@ -20,8 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const TaskList = (props) => {
-
-  console.log(props.todos.reducer);
+  // console.log(props.todos.reducer);
   return (
     <div className={styles.container}>
       {props.todos.reducer.length === 0 ? (
