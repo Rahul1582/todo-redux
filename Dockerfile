@@ -1,4 +1,4 @@
-FROM node:17-alpine
+FROM node:17-alpine AS builder
 
 WORKDIR /app
 
@@ -8,6 +8,13 @@ RUN npm install --force
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm","start"]
+# Fetching the latest nginx image
+FROM nginx
+
+# Copying built assets from builder
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Copying our nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
